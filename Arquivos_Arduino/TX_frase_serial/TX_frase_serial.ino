@@ -9,13 +9,6 @@ void setup()
 {    
     Serial.begin(9600);
     CAN.begin(CAN_1000KBPS);
-
-    /*while (CAN_OK != CAN.begin(CAN_500KBPS))
-    {
-        Serial.println("CAN BUS init Failed");
-        delay(100);
-    }
-    Serial.println("CAN BUS Shield Init OK!");*/
 }
 
 void loop()
@@ -26,12 +19,10 @@ void loop()
   if (Serial.available() > 0)
   {         
       c[0] = Serial.read(); 
-      //Serial.println(c[0]);
       Serial.flush();
-      //delay(1000);                    
+                       
   }
-  
-  //Serial.println("In loop");
+
   CAN.sendMsgBuf(0x43, 0, 1, c);
   delay(200);
 }
