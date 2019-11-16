@@ -2,8 +2,7 @@
 #include "mcp_can.h"
 
 const int spiCSPin = 10;
-const int ledPin = 2;
-boolean ledON = 1;
+
 
 MCP_CAN CAN(spiCSPin);
 
@@ -32,27 +31,10 @@ void loop()
 
         unsigned long canId = CAN.getCanId();
 
-        //Serial.println("-----------------------------");
-        //Serial.print("Data from ID: 0x");
-        //Serial.println(canId, HEX);
-
         for(int i = 0; i<len; i++)
         {
             Serial.print(char(buf[i]));
-            //Serial.print("\t");
-            if(ledON && i==0)
-            {
-
-                digitalWrite(ledPin, buf[i]);
-                ledON = 0;
-                delay(200);
-            }
-            else if((!(ledON)) && i==4)
-            {
-
-                digitalWrite(ledPin, buf[i]);
-                ledON = 1;
-            }
+         
         }
         Serial.println();
     }
